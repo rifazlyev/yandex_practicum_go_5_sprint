@@ -19,12 +19,12 @@ type Training struct {
 }
 
 func (t *Training) Parse(datastring string) (err error) {
-	slice := strings.Split(datastring, ",")
-	if len(slice) != 3 {
+	data := strings.Split(datastring, ",")
+	if len(data) != 3 {
 		return errors.New("invalid string format")
 	}
 
-	steps, err := strconv.Atoi(slice[0])
+	steps, err := strconv.Atoi(data[0])
 	if err != nil {
 		return fmt.Errorf("invalid steps format: %w", err)
 	}
@@ -32,9 +32,9 @@ func (t *Training) Parse(datastring string) (err error) {
 		return errors.New("steps count must be positive")
 	}
 
-	trainingType := slice[1]
+	trainingType := data[1]
 
-	duration, err := time.ParseDuration(slice[2])
+	duration, err := time.ParseDuration(data[2])
 	if err != nil {
 		return fmt.Errorf("invalid duration format: %w", err)
 	}
