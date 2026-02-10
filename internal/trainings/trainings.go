@@ -57,13 +57,16 @@ func (t Training) ActionInfo() (string, error) {
 
 	var calories float64
 	var err error
-	if trainingType == "Бег" {
+
+	switch trainingType {
+	case "Бег":
 		calories, err = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
-	} else if trainingType == "Ходьба" {
+	case "Ходьба":
 		calories, err = spentenergy.WalkingSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
-	} else {
+	default:
 		return "", errors.New("неизвестный тип тренировки")
 	}
+
 	if err != nil {
 		return "", fmt.Errorf("invalid data: %w", err)
 	}
